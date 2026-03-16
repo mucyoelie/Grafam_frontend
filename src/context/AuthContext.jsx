@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 
 const AuthContext = createContext(null);
 
-axios.defaults.baseURL = '/api';
-
+//axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = 'https://grafam-backend.onrender.com/api';
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
