@@ -154,8 +154,8 @@ const LoginPage = () => {
           </p>
 
           <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <p className="text-amber-800 text-xs font-semibold mb-1">Demo Credentials</p>
-            <p className="text-amber-700 text-xs">Email: admin@grafam.org | Password: grafam2024</p>
+            <p className="text-amber-800 text-lg font-semibold mb-1">The Holy Spirit — Our Helper and Guide</p>
+            <p className="text-amber-700 text-xs">The Holy Spirit is God’s precious gift to every believer.</p>
           </div>
 
           <p className="mt-6 text-center text-xs text-gray-400">
