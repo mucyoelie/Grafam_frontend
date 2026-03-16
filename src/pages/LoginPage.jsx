@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, Cross, AlertCircle, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Cross, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -49,45 +49,75 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex font-body">
-      {/* Left Panel */}
+
+      {/* ── LEFT PANEL ──────────────────────────────────────── */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-primary-950 via-primary-800 to-primary-600">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
         <div className="absolute top-20 right-20 w-64 h-64 bg-gold-500 opacity-10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-primary-400 opacity-20 rounded-full blur-3xl" />
-        <div className="relative z-10 flex flex-col justify-center px-16 text-white">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
-              <Cross className="w-6 h-6 text-white" strokeWidth={2.5} />
-            </div>
-            <div>
-              <p className="font-display font-bold text-2xl">GRAFAM</p>
-              <p className="text-white/60 text-sm">Soppo Church Portal</p>
-            </div>
-          </div>
-          <h2 className="font-display text-5xl font-bold leading-tight mb-6">
-            Welcome<br />
-            <span className="text-gold-400">Back,</span><br />
-            Faithful One.
-          </h2>
-          <p className="text-white/70 text-lg leading-relaxed max-w-sm">
-            Sign in to manage communications for Grace Faith Mission and stay connected with your church family.
-          </p>
-          <div className="mt-12 space-y-4">
-            {['Send bulk announcements', 'Manage 43+ members', 'Schedule reminders'].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-white/80">
-                <div className="w-6 h-6 bg-gold-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs text-gray-900 font-bold">✓</span>
-                </div>
-                <span>{item}</span>
+
+        <div className="relative z-10 flex flex-col justify-between px-16 py-12 text-white w-full">
+
+          {/* Back to Home — top left of left panel (desktop) */}
+          <button
+            onClick={() => navigate('/')}
+            className="self-start flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </button>
+
+          {/* Main left-panel content */}
+          <div>
+            <div className="flex items-center gap-3 mb-12">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                <Cross className="w-6 h-6 text-white" strokeWidth={2.5} />
               </div>
-            ))}
+              <div>
+                <p className="font-display font-bold text-2xl">GRAFAM</p>
+                <p className="text-white/60 text-sm">Soppo Church Portal</p>
+              </div>
+            </div>
+
+            <h2 className="font-display text-5xl font-bold leading-tight mb-6">
+              Welcome<br />
+              <span className="text-gold-400">Back,</span><br />
+              Faithful One.
+            </h2>
+            <p className="text-white/70 text-lg leading-relaxed max-w-sm">
+              Sign in to manage communications for Grace Faith Mission and stay connected with your church family.
+            </p>
+
+            <div className="mt-12 space-y-4">
+              {['Send bulk announcements', 'Manage 43+ members', 'Schedule reminders'].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 text-white/80">
+                  <div className="w-6 h-6 bg-gold-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs text-gray-900 font-bold">✓</span>
+                  </div>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Spacer bottom */}
+          <div />
         </div>
       </div>
 
-      {/* Right Panel - Form */}
+      {/* ── RIGHT PANEL — FORM ──────────────────────────────── */}
       <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
         <div className="w-full max-w-md">
+
+          {/* ── BACK TO HOME BUTTON (visible on all screens) ── */}
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-gray-400 hover:text-primary-700 text-sm font-medium transition-colors group mb-8"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </button>
+
           {/* Mobile logo */}
           <div className="flex lg:hidden items-center gap-3 mb-8 justify-center">
             <div className="w-10 h-10 bg-primary-700 rounded-xl flex items-center justify-center">
@@ -109,6 +139,7 @@ const LoginPage = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+
             {/* Email */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
@@ -120,7 +151,11 @@ const LoginPage = () => {
                   className={`w-full pl-11 pr-4 py-3 border rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${errors.email ? 'border-red-400 focus:ring-red-200 bg-red-50' : 'border-gray-200 focus:ring-primary-200 focus:border-primary-400'}`}
                 />
               </div>
-              {errors.email && <p className="mt-1.5 text-red-500 text-sm flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" />{errors.email}</p>}
+              {errors.email && (
+                <p className="mt-1.5 text-red-500 text-sm flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" />{errors.email}
+                </p>
+              )}
             </div>
 
             {/* Password */}
@@ -133,18 +168,29 @@ const LoginPage = () => {
                   placeholder="••••••••"
                   className={`w-full pl-11 pr-12 py-3 border rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${errors.password ? 'border-red-400 focus:ring-red-200 bg-red-50' : 'border-gray-200 focus:ring-primary-200 focus:border-primary-400'}`}
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              {errors.password && <p className="mt-1.5 text-red-500 text-sm flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" />{errors.password}</p>}
+              {errors.password && (
+                <p className="mt-1.5 text-red-500 text-sm flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" />{errors.password}
+                </p>
+              )}
             </div>
 
             <button
               type="submit" disabled={loading}
               className="w-full bg-primary-700 hover:bg-primary-800 disabled:bg-primary-400 text-white py-3.5 rounded-xl font-bold text-base transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
             >
-              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Signing in...</> : 'Sign In to Portal'}
+              {loading
+                ? <><Loader2 className="w-5 h-5 animate-spin" /> Signing in...</>
+                : 'Sign In to Portal'
+              }
             </button>
           </form>
 
@@ -155,7 +201,7 @@ const LoginPage = () => {
 
           <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl">
             <p className="text-amber-800 text-lg font-semibold mb-1">The Holy Spirit — Our Helper and Guide</p>
-            <p className="text-amber-700 text-xs">The Holy Spirit is God’s precious gift to every believer.</p>
+            <p className="text-amber-700 text-xs">The Holy Spirit is God's precious gift to every believer.</p>
           </div>
 
           <p className="mt-6 text-center text-xs text-gray-400">
